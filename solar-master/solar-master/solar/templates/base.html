@@ -1,26 +1,30 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="{{ DEFAULT_LANG }}">
 
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"> 
-  <title>Pelican Template Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"> {% block head %}
 
-  <link rel="stylesheet" href="/theme/css/style.min.css?99634230">   	<meta property="og:title" content="Pelican Template Test"/>
-	<meta name="twitter:title" content="Pelican Template Test">
-	<meta name="twitter:card" content="summary" />
-	<meta property="og:url" content="" />
-	<meta property="og:description" content="Low-tech Magazine refuses to assume that every problem has a high-tech solution. A simple, sensible, but nevertheless controversial message; high-tech has become the idol of our society.">
-	<meta property="twitter:description" content="Low-tech Magazine refuses to assume that every problem has a high-tech solution. A simple, sensible, but nevertheless controversial message; high-tech has become the idol of our society.">
-	<meta property="og:site_name" content="Pelican Template Test" />
-	<meta property="og:article:author" content="Julius" />
-	<meta property="og:image" content="https://solar.lowtechmagazine.com/extra/clear-day.png" />
-	<meta name="twitter:image" content="https://solar.lowtechmagazine.com/extra/clear-day.png" >
-         </head>
+  <title>{% block title %}{{ SITENAME }}{% endblock title %}</title>
 
-<body class="index1">
+  {% assets filters="libsass,cssmin", output="css/style.min.css", "css/style.scss" %}
+  <link rel="stylesheet" href="{{ SITEURL }}/{{ ASSET_URL }}"> {% endassets %} {% from 'syndication.html' import syndication with context %} {{ syndication(article) }} {% if FEED_ALL_ATOM %}
+
+  <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Full Atom Feed" /> {% endif %} {% if FEED_ALL_RSS %}
+  <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Full RSS Feed" /> {% endif %} {% if FEED_ATOM %}
+  <link href="{{ FEED_DOMAIN }}/{{ FEED_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Atom Feed" /> {% endif %} {% if FEED_RSS %}
+  <link href="{{ FEED_DOMAIN }}/{{ FEED_RSS }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" /> {% endif %} {% if CATEGORY_FEED_ATOM and category %}
+  <link href="{{ FEED_DOMAIN }}/{{ CATEGORY_FEED_ATOM|format(category.slug) }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Categories Atom Feed" /> {% endif %} {% if CATEGORY_FEED_RSS and category %}
+  <link href="{{ FEED_DOMAIN }}/{{ CATEGORY_FEED_RSS|format(category.slug) }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Categories RSS Feed" /> {% endif %} {% if TAG_FEED_ATOM and tag %}
+  <link href="{{ FEED_DOMAIN }}/{{ TAG_FEED_ATOM|format(tag.slug) }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Tags Atom Feed" /> {% endif %} {% if TAG_FEED_RSS and tag %}
+  <link href="{{ FEED_DOMAIN }}/{{ TAG_FEED_RSS|format(tag.slug) }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Tags RSS Feed" /> {% endif %} {% endblock head %}
+</head>
+
+{% block body_class %}
+<body>
+{% endblock body_class %}
 <div id="bat_data" class="bat_status">
-  <a href="/power.html" title="Battery Capacity">
+  <a href="{{ SITEURL }}/power.html" title="Battery Capacity">
     <span id="charge_icon"></span>
     <span id="level">0%</span></a>
 </div>
@@ -28,52 +32,32 @@
 </div>
 <main>
   <header class="top">
-    <h1><a href="/">Pelican Template Test</a></h1>
+    <h1><a href="{{ SITEURL }}/">{{ SITENAME }}</a></h1>
     <div class="subtitle">
-      <a href="/power.html"> <svg class="icon" viewBox="0 0 500 500"><title>Solar</title><circle class="svg_fill" cx="248.48" cy="252.55" r="97.03"/><rect class="svg_fill" x="234.53" y="17.45" width="27.9" height="112.39"/><rect class="svg_fill" x="234.53" y="375.25" width="27.9" height="112.39"/><rect class="svg_fill" x="413.42" y="196.35" width="27.9" height="112.39" transform="translate(679.92 -174.83) rotate(90)"/><rect class="svg_fill" x="55.63" y="196.35" width="27.9" height="112.39" transform="translate(322.12 182.97) rotate(90)"/><rect class="svg_fill" x="361.03" y="69.85" width="27.9" height="112.39" transform="translate(198.96 -228.23) rotate(45)"/><rect class="svg_fill" x="108.03" y="322.85" width="27.9" height="112.39" transform="translate(303.75 24.77) rotate(45)"/><rect class="svg_fill" x="361.03" y="322.85" width="27.9" height="112.39" transform="translate(908.15 381.93) rotate(135)"/><rect class="svg_fill" x="108.03" y="69.85" width="27.9" height="112.39" transform="translate(297.35 128.93) rotate(135)"/></svg></a>
+      <a href="{{ SITEURL }}/power.html">{{ SITESUBTITLE }} <svg class="icon" viewBox="0 0 500 500"><title>Solar</title><circle class="svg_fill" cx="248.48" cy="252.55" r="97.03"/><rect class="svg_fill" x="234.53" y="17.45" width="27.9" height="112.39"/><rect class="svg_fill" x="234.53" y="375.25" width="27.9" height="112.39"/><rect class="svg_fill" x="413.42" y="196.35" width="27.9" height="112.39" transform="translate(679.92 -174.83) rotate(90)"/><rect class="svg_fill" x="55.63" y="196.35" width="27.9" height="112.39" transform="translate(322.12 182.97) rotate(90)"/><rect class="svg_fill" x="361.03" y="69.85" width="27.9" height="112.39" transform="translate(198.96 -228.23) rotate(45)"/><rect class="svg_fill" x="108.03" y="322.85" width="27.9" height="112.39" transform="translate(303.75 24.77) rotate(45)"/><rect class="svg_fill" x="361.03" y="322.85" width="27.9" height="112.39" transform="translate(908.15 381.93) rotate(135)"/><rect class="svg_fill" x="108.03" y="69.85" width="27.9" height="112.39" transform="translate(297.35 128.93) rotate(135)"/></svg></a>
     </div>
     <nav id="menu">
       <div id="menu-s">
         menu
       </div>
       <ul id="menu-list">
-        <li><a href="/about.html">About</a></li>
-        <li class="low"><a class="category" href="/low-tech-solutions.html">Low-tech Solutions</a></li>
-        <li class="hig"><a class="category" href="/high-tech-problems.html">High-tech Problems</a></li>
-        <li class="obs"><a class="category" href="/obsolete-technology.html">Obsolete Technology</a></li>
-        <li><a href="/archives.html">Archive</a></li>
-        <li><a href="/donate.html">Donate</a></li>
-        <li class="social"><a href="/" type="application/rss+xml" rel="alternate" target="_blank"><svg viewBox="0 0 80 80" class="icon"><title>rss</title><circle cx="19.91" cy="58.23" r="6.86"/><path d="M67.89,65.72H55.7A41.86,41.86,0,0,0,13.89,23.91V11.73A54.06,54.06,0,0,1,67.89,65.72Z"/><path d="M48.93,65.72H36.75A22.88,22.88,0,0,0,13.89,42.87V30.68A35.08,35.08,0,0,1,48.93,65.72Z"/></svg></a></li>
+        <li><a href="{{ SITEURL }}/about.html">About</a></li>
+        <li class="low"><a class="category" href="{{ SITEURL }}/low-tech-solutions.html">Low-tech Solutions</a></li>
+        <li class="hig"><a class="category" href="{{ SITEURL }}/high-tech-problems.html">High-tech Problems</a></li>
+        <li class="obs"><a class="category" href="{{ SITEURL }}/obsolete-technology.html">Obsolete Technology</a></li>
+        <li><a href="{{ SITEURL }}/archives.html">Archive</a></li>
+        <li><a href="{{ SITEURL }}/donate.html">Donate</a></li>
+        <li class="social"><a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}" type="application/rss+xml" rel="alternate" target="_blank"><svg viewBox="0 0 80 80" class="icon"><title>rss</title><circle cx="19.91" cy="58.23" r="6.86"/><path d="M67.89,65.72H55.7A41.86,41.86,0,0,0,13.89,23.91V11.73A54.06,54.06,0,0,1,67.89,65.72Z"/><path d="M48.93,65.72H36.75A22.88,22.88,0,0,0,13.89,42.87V30.68A35.08,35.08,0,0,1,48.93,65.72Z"/></svg></a></li>
       </ul>
     </nav>
     <!-- /#menu -->
   </header>
   <!-- /#banner -->
 
-  <section id="content">
-    <ul class="cols cover review">
-        <li>
-          <a href="/my-second-review.html" rel="bookmark" title="Permalink to My Second Review"><h2 class="entry-title">My Second Review</h2></a>
-          <a href="/category/review.html" class="category">Review</a>
-            <p class="index-summary"><p>Es gibt ein paar Anpassungen, die du vornehmen kannst, um sicherzustellen, dass Pelican das Theme korrekt findet. Deine pelicanconf.py-Datei scheint einen kleinen Fehler in der Syntax des THEME-Pfads zu haben.</p>
-<p>Syntax des THEME-Pfads:
-Der THEME-Pfad sollte als einfacher String definiert werden, ohne zusätzliche Klammern. Vermeide auch den doppelten Backslash …</p></p>
-          <time class="published" datetime="2010-12-03T10:20:00+01:00">Dezember 2010</time>
-        </li>
-        <li>
-      </li>
-    </ul>
-    <ul class="cols recent">
-    </ul>
-    <!-- /posts-list -->
-    <ul class="cols popular">
-    </ul>
-  </section>
-  <!-- /#content -->
-
+  {% block content %} {% endblock %}
   <footer id="content-info" class="body">
     <h2>
-    <a href="/">Pelican Template Test</a>
+    <a href="{{ SITEURL }}/">{{ SITENAME }}</a>
   </h2>
     <div class="dashboard">
       <ul class="cols">
@@ -95,25 +79,27 @@ Der THEME-Pfad sollte als einfacher String definiert werden, ohne zusätzliche K
         <li>
           <h3>Info</h3>
           <p>
-            <a href="/about.html">About the site</a><br>
-            <a href="/power.html">Power</a><br>
-            <a href="/colophon.html">Colophon</a><br>
-            <a href="/donate.html">Donate</a>
+            <a href="{{ SITEURL }}/about.html">About the site</a><br>
+            <a href="{{ SITEURL }}/power.html">Power</a><br>
+            <a href="{{ SITEURL }}/colophon.html">Colophon</a><br>
+            <a href="{{ SITEURL }}/donate.html">Donate</a>
           </p>
-          <p><a href="/privacy.html">Privacy Policy</a></p>
+          <p><a href="{{ SITEURL }}/privacy.html">Privacy Policy</a></p>
         </li>
         <li>
           <h3>Contact</h3>
           <p>
             &copy; Kris De Decker<br>
           solar [at] lowtechmagazine [dot] com</p>
+          {% if SOCIAL or FEED_ALL_ATOM or FEED_ALL_RSS %}
           <div class="social">
-            <a href="/" type="application/rss+xml" rel="alternate"><svg viewBox="0 0 80 80" class="icon"><title>rss</title><circle cx="19.91" cy="58.23" r="6.86"/><path d="M67.89,65.72H55.7A41.86,41.86,0,0,0,13.89,23.91V11.73A54.06,54.06,0,0,1,67.89,65.72Z"/><path d="M48.93,65.72H36.75A22.88,22.88,0,0,0,13.89,42.87V30.68A35.08,35.08,0,0,1,48.93,65.72Z"/></svg></a>
+            <a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}" type="application/rss+xml" rel="alternate"><svg viewBox="0 0 80 80" class="icon"><title>rss</title><circle cx="19.91" cy="58.23" r="6.86"/><path d="M67.89,65.72H55.7A41.86,41.86,0,0,0,13.89,23.91V11.73A54.06,54.06,0,0,1,67.89,65.72Z"/><path d="M48.93,65.72H36.75A22.88,22.88,0,0,0,13.89,42.87V30.68A35.08,35.08,0,0,1,48.93,65.72Z"/></svg></a>
             <a href="https://www.facebook.com/Lowtechmagazine/"><svg viewBox="0 0 80 80" class="icon"><title>facebook</title><path d="M57.16,16.42H50.87c-4.93,0-5.85,2.36-5.85,5.77v7.57H56.76L55.2,41.61H45V72H32.77V41.61H22.56V29.76H32.77V21C32.77,10.9,39,5.37,48,5.37a78.35,78.35,0,0,1,9.13.48Z"/></svg></a>
             <a href="https://twitter.com/lowtechmagazine"><svg viewBox="0 0 80 80" class="icon"><title>twitter</title><path d="M65.05,29.23c0,.56,0,1.12,0,1.68,0,17.1-13,36.8-36.8,36.8A36.54,36.54,0,0,1,8.44,61.91a26.68,26.68,0,0,0,3.12.16,25.9,25.9,0,0,0,16.06-5.53,13,13,0,0,1-12.09-9,16.28,16.28,0,0,0,2.44.2,13.67,13.67,0,0,0,3.4-.44A12.93,12.93,0,0,1,11,34.64v-.16a13,13,0,0,0,5.85,1.64,13,13,0,0,1-4-17.3A36.76,36.76,0,0,0,39.51,32.36a14.58,14.58,0,0,1-.32-3,12.95,12.95,0,0,1,22.38-8.85,25.45,25.45,0,0,0,8.21-3.12,12.9,12.9,0,0,1-5.69,7.13,25.93,25.93,0,0,0,7.45-2A27.79,27.79,0,0,1,65.05,29.23Z"/></svg></a>
             <a href="mailto:solar@lowtechmagazine.com"><svg viewBox="0 0 80 80" class="icon"><title>email</title><path d="M4.95,13.14v55H74.33v-55Zm54.34,8.12L39.64,39.74,20,21.26ZM13.07,60V25.91l26.56,25,26.57-25V60Z"/></svg></a>
          </div>
           <!-- /.social -->
+          {% endif %}
         </li>
       </ul>
     </div>

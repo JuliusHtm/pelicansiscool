@@ -29,13 +29,13 @@ SOCIAL = (
     ("Another social link", "#"),
 
 )
-THEME = "C:\\Users\\juliu\\Uni\\projects\\pelicansiscool\\pelican-themes\\bootlex"
+THEME = "C:\\Users\\juliu\\Uni\\projects\\pelicansiscool\\solar-master\\solar-master\\solar"
 
 STATIC_URL = '/static/'
-
+PLUGINS = ["assets"]
 STATIC_PATHS = ['static']
 
-
+PLUGIN_PATHS = ["C:\\Users\\juliu\\Uni\\projects\\pelicansiscool\\solar-plugins"]
 
 DEFAULT_PAGINATION = False
 
