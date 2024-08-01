@@ -1,0 +1,7 @@
+[submodule "pelican-themes"]
+    path = pelican-themes
+    url = https://github.com/getpelican/pelican-themes.git
+
+[submodule "solar-plugins"]
+    path = solar-plugins
+    url = https://github.com/JuliusHtm/solar-plugins.git
